@@ -41,7 +41,7 @@ clearvars;
 close all;
 
 %% ----------   Variables    ----------
-index_example = 1;
+index_example = 7;
 
 switch index_example
     case 1
@@ -151,6 +151,22 @@ switch index_example
         PV_waypoints      = reshape(PV_waypoint_min+(PV_waypoint_max-PV_waypoint_min).*rand(num_axes,num_waypoints),num_axes,1,num_waypoints);
         PA_waypoints      = reshape(PA_waypoint_min+(PA_waypoint_max-PA_waypoint_min).*rand(num_axes,num_waypoints),num_axes,1,num_waypoints);
         Waypoints         = cat(2,P_waypoints,V_waypoints,A_waypoints,PV_waypoints,PA_waypoints);
+    case 7
+        num_waypoints = 5;
+        num_axes = 1;
+        State_start       = [ 0.0,  0.0,  0.0];
+        Waypoints(:,:,1)  = [ 2.0,  NaN,  NaN,  0.0,  0.0];
+        Waypoints(:,:,2)  = [ 2.1,  NaN,  NaN,  0.0,  0.0];
+        Waypoints(:,:,3)  = [ 2.2,  NaN,  NaN,  0.0,  0.0];
+        Waypoints(:,:,4)  = [ 4.0,  NaN,  NaN,  0.0,  0.0];
+        Waypoints(:,:,5)  = [ 0.0,  0.0,  0.0,  0.0,  0.0];
+        V_max             =  1.0*ones(num_axes,num_waypoints);
+        V_min             = -1.0*ones(num_axes,num_waypoints);
+        A_max             =  0.5*ones(num_axes,num_waypoints);
+        A_min             = -0.5*ones(num_axes,num_waypoints);
+        J_max             =  1.0*ones(num_axes,num_waypoints);
+        J_min             = -1.0*ones(num_axes,num_waypoints);
+        A_global          =  0.0*ones(num_axes,1);
     otherwise
         disp('Error: Please select a valid example!');
 end
