@@ -41,7 +41,7 @@ clearvars;
 close all;
 
 %% ----------   Variables    ----------
-index_example = 7;
+index_example = 8;
 
 switch index_example
     case 1
@@ -152,6 +152,7 @@ switch index_example
         PA_waypoints      = reshape(PA_waypoint_min+(PA_waypoint_max-PA_waypoint_min).*rand(num_axes,num_waypoints),num_axes,1,num_waypoints);
         Waypoints         = cat(2,P_waypoints,V_waypoints,A_waypoints,PV_waypoints,PA_waypoints);
     case 7
+        % Several via points, with only positions specified
         num_waypoints = 5;
         num_axes = 1;
         State_start       = [ 0.0,  0.0,  0.0];
@@ -160,6 +161,26 @@ switch index_example
         Waypoints(:,:,3)  = [ 2.2,  NaN,  NaN,  0.0,  0.0];
         Waypoints(:,:,4)  = [ 4.0,  NaN,  NaN,  0.0,  0.0];
         Waypoints(:,:,5)  = [ 0.0,  0.0,  0.0,  0.0,  0.0];
+        V_max             =  1.0*ones(num_axes,num_waypoints);
+        V_min             = -1.0*ones(num_axes,num_waypoints);
+        A_max             =  0.5*ones(num_axes,num_waypoints);
+        A_min             = -0.5*ones(num_axes,num_waypoints);
+        J_max             =  1.0*ones(num_axes,num_waypoints);
+        J_min             = -1.0*ones(num_axes,num_waypoints);
+        A_global          =  0.0*ones(num_axes,1);
+    case 8
+        % Stopping on a tangent
+        num_waypoints = 2;
+        num_axes = 3;
+        State_start       = [ 0.0,  0.0,  0.0;
+                              0.0,  0.0,  0.0;
+                              0.0, 0.0, 0.0];
+        Waypoints(:,:,1)  = [ 1.0,  NaN,  NaN,  0.0,  0.0;
+                              2.0,  NaN,  NaN,  0.0,  0.0;
+                              3.0, NaN, NaN, 0.0, 0.0];
+        Waypoints(:,:,2)  = [ NaN,  0.0,  0.0,  0.0,  0.0;
+                              NaN,  0.0,  0.0,  0.0,  0.0;
+                              NaN, 0.0, 0.0, 0.0, 0.0];
         V_max             =  1.0*ones(num_axes,num_waypoints);
         V_min             = -1.0*ones(num_axes,num_waypoints);
         A_max             =  0.5*ones(num_axes,num_waypoints);
@@ -195,6 +216,6 @@ t_elapsed = toc;
 disp(['Debug: Generated trajectory for ',int2str(num_axes),' axes and ',int2str(num_waypoints),' waypoints in ',num2str(t_elapsed),'s!']);
 show_trajectory_1D;
 
-if (index_example == 4)
+if (index_example == 4 || index_example == 8)
     show_trajectory_3D;
 end

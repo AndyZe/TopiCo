@@ -154,6 +154,7 @@ for index_waypoint = 1:1:num_waypoints-1
     yt = @(t) Waypoints(2,1,index_waypoint)+Waypoints(2,4,index_waypoint).*t+1/2.*Waypoints(2,5,index_waypoint).*t.^2;
     zt = @(t) Waypoints(3,1,index_waypoint)+Waypoints(3,4,index_waypoint).*t+1/2.*Waypoints(3,5,index_waypoint).*t.^2;
     fplot3(xt,yt,zt,[0 sum(max(T_waypoints))],'Color',color_waypoint,'LineStyle',':','LineWidth',size_path);
+    plot3(Waypoints(1,1,index_waypoint), Waypoints(2,1,index_waypoint), Waypoints(3,1,index_waypoint), 'bx', 'LineWidth', 10);
 end
 
 %Endpoint Path
