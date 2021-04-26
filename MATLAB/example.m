@@ -169,7 +169,7 @@ switch index_example
         J_min             = -1.0*ones(num_axes,num_waypoints);
         A_global          =  0.0*ones(num_axes,1);
     case 8
-        % Stopping on a tangent
+        % Stopping by specifying zero vels/accels
         num_waypoints = 2;
         num_axes = 3;
         State_start       = [ 0.0,  0.0,  0.0;
